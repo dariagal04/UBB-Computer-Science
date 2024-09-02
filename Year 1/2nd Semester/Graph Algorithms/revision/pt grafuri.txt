@@ -1,0 +1,453 @@
+a mea
+
+#include <iostream>
+#include <fstream>
+#define nr 100
+using namespace std;
+ifstream f("date.txt");
+int main()
+{
+    int v, e;
+    f >> v >> e;
+    int ma[nr][nr] = { 0 }, mi[nr][nr] = { 0 }, la[nr][nr] = { 0 };
+    for (int i = 1; i <= e; i++)
+    {
+        int m, n;
+        f >> m >> n;
+        ma[n][m] = 1; ma[m][n] =1;
+        mi[m][i] = mi[n][i] = 1;
+    }
+    cout << "matrice adiacenta:" << endl;
+    for (int i = 1; i <= v; i++)
+    {
+        for (int j = 1; j <= e; j++)
+        {
+            cout << ma[i][j] << " ";
+            if (ma[i][j] == 1)
+            {
+                la[i][j] = la[j][i] = 1;
+                la[i][0]++;
+            }
+        }
+        cout << endl;
+    }
+    cout << endl;
+    cout << "liste de adiacenta:"<<endl;
+    for (int i = 1; i <= v; i++)
+    {
+        cout << i << ":";
+        for (int j = 0; j <= v; j++)
+        {
+            if (j == 0)
+                cout << la[i][j] << " ";
+            if (ma[i][j] ==1)
+               cout << j<< " ";
+ 
+        }
+        cout << endl;
+    }
+    cout << endl;
+    cout << "matrice incidenta:" << endl;
+    for (int i = 1; i <= v; i++)
+    {
+        for (int j = 1; j <= e; j++)
+            cout << mi[i][j] << " ";
+        cout << endl;
+    }
+    cout << endl;
+
+    f.close();
+    return 0;
+
+}
+-------------------------------------------------------------------
+1.
+
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+ifstream fin("C:\\Users\\Smara\\Desktop\\An_1\\AG_lab\\AG_lab1\\AG_lab1\\in.txt.txt");
+
+int n, n1, n2, nr_muchii;
+int mat_a[101][101], mat_i[101][101], l[101][101];
+
+int main()
+{
+	fin >> n;
+	while (fin >> n1 >> n2)
+	{
+		nr_muchii++;
+		mat_a[n1][n2] = mat_a[n2][n1] = 1;
+	}
+	cout << "Matricea de adiacenta:\n";
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+			cout << mat_a[i][j] << " ";
+		cout << '\n';
+	}
+	cout << "Lista de adiacenta:\n";
+	for (int i = 1; i <= n; i++)
+	{
+		int nrn = 0;
+		for (int j = 1; j <= n; j++)
+			if (mat_a[i][j] != 0)
+			{
+				nrn++;
+				l[i][nrn] = j;
+			}
+		nrn++;
+		l[i][nrn] = -1;
+	}
+	for (int i = 1; i <= n; i++)
+	{
+		cout << i << " : ";
+		int j = 1;
+		while (l[i][j] != -1)
+		{
+			cout << l[i][j] << " ";
+			j++;
+		}
+		cout << '\n';
+	}
+
+	cout << "Matricea de incidenta:\n";
+	int aux = 0;
+	for (int i = 1; i <= n; i++)
+	{
+		int j = 1;
+		while (l[i][j] != -1)
+		{
+			if (i < l[i][j])
+			{
+				aux++;
+				mat_i[i][aux] = mat_i[l[i][j]][aux] = 1;
+			}
+			j++;
+		}
+	}
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+			cout << mat_i[i][j] << " ";
+		cout << '\n';
+	}
+
+
+	cout << "Lista de adiacenta:\n";
+
+	l[100][100] = { 0 };
+
+	for (int i = 1; i <= n; i++)
+	{
+		int nrn = 0;
+		for (int j = 1; j <= nr_muchii; j++)
+			if (mat_i[i][j])
+			{
+				for (int k = 1; k <= n; k++)
+					if (k != i && mat_i[k][j])
+					{
+						nrn++;
+						l[i][nrn] = k;
+					}
+
+			}
+		nrn++;
+		l[i][nrn] = -1;
+	}
+
+	for (int i = 1; i <= n; i++)
+	{
+		cout << i << " : ";
+		int j = 1;
+		while (l[i][j] != -1)
+		{
+			cout << l[i][j] << " ";
+			j++;
+		}
+		cout << '\n';
+	}
+
+	cout << "Matrice de adiacenta:\n";
+
+	mat_a[100][100] = { 0 };
+
+	for (int i = 1; i <= n; i++)
+	{
+		int j = 1;
+		while (l[i][j] != -1)
+		{
+			mat_a[i][l[i][j]] = 1;
+			j++;
+		}
+	}
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+			cout << mat_a[i][j] << " ";
+		cout << '\n';
+	}
+
+	cout << "Lista:\n";
+
+	cout << nr_muchii << '\n';
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+			if (mat_a[i][j] == 1 && i < j)
+				cout << i << " " << j << '\n';
+	}
+	return 0;
+}
+
+-----------------------------------------------------------------------------------------
+2. bf cost minim
+
+#include<iostream>
+#include<fstream>
+#include<vector>
+#include<string>
+int const INF = 1 << 30;
+using namespace std;
+
+
+
+struct pondere {
+	int sursa, destinatie, cost;
+};
+
+vector <int> dest; //drumurile de cost minim 
+vector <pondere> point; //vector de pointeri
+int n, m, nsursa; 
+string fisierIntrare = "", fisierIesire = "";
+
+
+
+void relax(int  sursa, int destinatie, int cost) {
+	if (dest[sursa] != INF && dest[sursa] + cost < dest[destinatie])
+		dest[destinatie] = dest[sursa] + cost;
+}
+
+
+
+bool BellmanFord(int nSursa) {
+	//initializare
+	for (int i = 0; i < n; i++) {
+		if (i == nSursa)
+			dest[i] = 0;
+		else
+			dest[i] = INF;
+	}
+
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			relax(point[j].sursa, point[j].destinatie, point[j].cost);
+
+
+	for (int i = 0; i < m; i++)
+		if (dest[point[i].sursa] != INF && dest[point[i].sursa] + point[i].cost < dest[point[i].destinatie])
+			return false;
+	return true;
+
+}
+
+
+
+int main(int argc, char* argv[])
+{
+
+	int a, b, c;
+	/*cout << "Dati numele fisierului de intrare: ";
+	cin >> fisierIntrare;
+	cout << "Dati numele fisierului de iesire: ";
+	cin >> fisierIesire;*/
+	ifstream fin(argv[1]);
+	// ifstream fin(fisierIntrare);
+	fin >> n >> m >> nsursa;
+	dest.resize(n); point.resize(m);
+	for (int i = 0; i < m; i++)
+	{
+		fin >> a >> b >> c;
+		point[i].sursa = a;
+		point[i].destinatie = b;
+		point[i].cost = c;
+	}
+	fin.close();
+	bool ok = BellmanFord(nsursa);
+	ofstream fout(argv[2]);
+	//ofstream fout(fisierIesire);
+		if (ok == false)
+			fout << "Circuitul are pondere negativa. " << endl;
+		else {
+
+			for (int i = 0; i < n; i++) {
+				if (dest[i] != INF)
+					fout << dest[i] << " ";
+				else
+					fout << "INF" << " ";
+
+			}
+			cout << endl;
+		}
+		fout.close();
+	
+	return 0;
+}
+
+
+
+------------------------------------------------------------------
+a mea 2
+
+
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+ifstream fin("in.txt");
+int n, n1, n2, nr_muchii;
+int mat_a[101][101], mat_i[101][101], l[101][101];
+
+int main()
+{
+	fin >> n; 
+	while (fin >> n1 >> n2)
+	{
+		nr_muchii++;
+		mat_a[n1][n2] = mat_a[n2][n1] = 1;
+	}
+	cout << "Matricea de adiacenta:\n";
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+			cout << mat_a[i][j] << " ";
+		cout << '\n';
+	}
+	cout << "Lista de adiacenta:\n";
+	for (int i = 1; i <= n; i++)
+	{
+		int nrn = 0;
+		for (int j = 1; j <= n; j++)
+			if (mat_a[i][j] != 0)
+			{
+				nrn++;
+				l[i][nrn] = j;
+			}
+		nrn++;
+		l[i][nrn] = -1;
+	}
+	for (int i = 1; i <= n; i++)
+	{
+		cout << i << " : ";
+		int j = 1;
+		while (l[i][j] != -1)
+		{
+			cout << l[i][j] << " ";
+			j++;
+		}
+		cout << '\n';
+	}
+
+	int mat_aa[100][100] = { 0 };
+	cout << "Matricea de adiacenta iar:\n";
+	for (int i = 1; i <= n; i++)
+	{
+		int j = 1;
+		while (l[i][j] != -1)
+		{
+			mat_aa[i][l[i][j]] = 1;
+			j++;
+		}
+	}
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+			cout << mat_aa[i][j] << " ";
+		cout << '\n';
+	}
+	int k = 0;
+	mat_i[100][100] = { 0 };
+	cout << "Matricea de incidenta:\n";
+	for (int i = 1; i <=n; ++i) {
+		for (int j = i + 1; j <=n; ++j) {
+			if (mat_a[i][j] == 1) {
+				k++;
+				mat_i[i][k] = 1;
+				mat_i[j][k] = 1;
+
+			}
+		}
+	}
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= nr_muchii; j++)
+			cout << mat_i[i][j] << " ";
+		cout << '\n';
+	}
+	int mat_aaa[100][100] = { 0 };
+	cout << "Matricea de adiacenta iar:\n";;
+	for (int i = 1; i <= n; i++)
+		for (int j = 1; j <= nr_muchii; j++)
+			if (mat_i[i][j] == 1) {
+				for (int k = i + 1; k <= n; k++)
+					if (mat_i[k][j] == 1 && i != k) {
+						mat_aaa[i][k] = 1;
+						mat_aaa[k][i] = 1;
+					}
+			}
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+			cout << mat_aaa[i][j] << " ";
+		cout << '\n';
+	}
+
+}
+
+
+---------------------------------------------------
+
+
+graf conex
+
+
+#include<iostream>
+#include<fstream>
+using namespace std;
+ifstream fin("in.txt");
+
+int n, n1, n2, nr_muchii;
+int mat_a[101][101], viz[101] = { 0 };
+
+void dfs(int v) {
+	viz[v] = 1;
+	for (int i = 1; i <= n; i++) {
+		if (mat_a[v][i] == 1 && viz[i] == 0)
+			dfs(i);
+	}
+
+}
+int main()
+{
+	fin >> n;
+	while (fin >> n1 >> n2)
+	{
+		nr_muchii++;
+		mat_a[n1][n2] = mat_a[n2][n1] = 1;
+	}
+
+	dfs(1);
+	int ok3 = 0;
+	for (int i = 1; i <= n; i++)
+		if (viz[i] == 0) {
+			ok3 = 1;
+
+		}
+	if (ok3 == 0)
+		cout << "Graful e conex\n";
+	else
+	cout << "Graful nu e conex!\n";
+}
