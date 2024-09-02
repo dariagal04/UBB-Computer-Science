@@ -1,0 +1,21 @@
+[2024-04-11 08:30:40] [info] Start Program:
+Path:"D:\dari\an1sem2\SDA\lab2 matrice\x64\Debug\lab2 matrice.exe"
+Arguments:
+Working directory: "D:\dari\an1sem2\SDA\lab2 matrice\lab2 matrice\"
+Modules: Selected: D:\dari\an1sem2\SDA\lab2 matrice\x64\Debug\lab2 matrice.exe Excluded: 
+Sources: Selected: D:\dari\an1sem2\SDA\lab2 matrice\lab2 matrice Excluded: 
+Log Level: Normal
+Cover Children: 0
+Aggregate by file: 1
+Continue after C++ exception: 0
+Optimized build support: 0
+Export: Binary C:\Users\user\AppData\Local\Temp\jc2fxokx.mky 
+Input coverage: 
+Unified diff: 
+Excluded line regular expressions: 
+Substitute pdb source paths: 
+
+[2024-04-11 08:30:40] [info] Module: D:\dari\an1sem2\SDA\lab2 matrice\x64\Debug\lab2 matrice.exe is selected because it matches selected pattern: D:\dari\an1sem2\SDA\lab2 matrice\x64\Debug\lab2 matrice.exe
+[2024-04-11 08:31:00] [info] ----------------------------------------------------
+[2024-04-11 08:31:00] [info] Coverage binary generated in file: C:\Users\user\AppData\Local\Temp\jc2fxokx.mky
+[2024-04-11 08:31:00] [info] ----------------------------------------------------
