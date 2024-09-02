@@ -1,0 +1,21 @@
+[2024-05-17 09:29:05] [info] Start Program:
+Path:"D:\dari\an1sem2\OOP\lab6-7\x64\Debug\lab6-7.exe"
+Arguments:
+Working directory: "D:\dari\an1sem2\OOP\lab6-7\lab6-7\"
+Modules: Selected: D:\dari\an1sem2\OOP\lab6-7\x64\Debug\lab6-7.exe Excluded: 
+Sources: Selected: D:\dari\an1sem2\OOP\lab6-7\lab6-7 Excluded: 
+Log Level: Normal
+Cover Children: 0
+Aggregate by file: 1
+Continue after C++ exception: 0
+Optimized build support: 0
+Export: Binary C:\Users\user\AppData\Local\Temp\0jdsranl.x3e 
+Input coverage: 
+Unified diff: 
+Excluded line regular expressions: 
+Substitute pdb source paths: 
+
+[2024-05-17 09:29:05] [info] Module: D:\dari\an1sem2\OOP\lab6-7\x64\Debug\lab6-7.exe is selected because it matches selected pattern: D:\dari\an1sem2\OOP\lab6-7\x64\Debug\lab6-7.exe
+[2024-05-17 09:29:05] [info] ----------------------------------------------------
+[2024-05-17 09:29:05] [info] Coverage binary generated in file: C:\Users\user\AppData\Local\Temp\0jdsranl.x3e
+[2024-05-17 09:29:05] [info] ----------------------------------------------------
