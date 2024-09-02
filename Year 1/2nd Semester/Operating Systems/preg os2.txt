@@ -1,0 +1,64 @@
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+
+int main(int argc, char* argv[])
+{
+        int pd[2];
+        int res = pipe(pd);
+        if(res == -1)
+        {
+                perror("pipe...");
+                exit(EXIT_FAILURE);
+        }
+        int pid = fork();
+        if(pid == -1)
+        {
+                perror("fork...");
+                exit(EXIT_FAILURE);
+        }
+        if(pid == 0)
+        {
+                //close(pd[1]);
+                int nr, n, sum = 0, cate;
+                read(pd[0], &nr, sizeof(int));
+                printf("avem %d numere\n", nr);
+                printf("numerele sunt: ");
+                cate = nr;
+                while(nr)
+                {
+                        read(pd[0], &n, sizeof(int));
+                        sum = sum + n;
+                        printf("%d\n", n);
+                        nr--;
+                }
+                float medie;
+                medie = sum/cate;
+                write(pd[1], &medie, sizeof(float));
+                //printf("media lor este %f", medie);
+                close(pd[0]);
+                close(pd[1]);
+                exit(EXIT_SUCCESS);
+        }
+        //close(pd[0]);
+        int nr,n;
+        float medie;
+        printf("N = ");
+        scanf("%d", &nr);
+        write(pd[1],&nr, sizeof(int));
+        while(nr)
+        {
+                printf("numar: ");
+                //scanf("%d", &n);
+                n = random();
+                write(pd[1], &n, sizeof(int));
+                nr--;
+        }
+        read(pd[0], &medie, sizeof(float));
+        printf("media lor este %f", medie);
+        close(pd[1]);
+        close(pd[0]);
+        return 0;
+}

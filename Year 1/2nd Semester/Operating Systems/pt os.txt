@@ -1,0 +1,175 @@
+1.
+
+#!/bin/bash
+
+# Verificăm dacă nu s-au furnizat argumente
+if [ $# -eq 0 ]; then
+    echo "Numar incorect de argumente."
+    echo "Utilizare: $0 file1 file2 ..."
+    exit 1
+fi
+
+# Citim cuvântul de la tastatură până când se introduce "stop"
+while true; do
+    read -p "Cuvant: " word
+    if [ "$word" = "stop" ]; then file1 file2 ...
+        break
+    fi
+done
+
+# Iterăm prin fiecare fișier furnizat ca argument
+for file in "$@"; do
+    # Verificăm dacă fișierul este de tip text
+    if [ -f "$file" ]; then
+        if [ $(file -b --mime-type "$file") = "text/plain" ]; then
+            echo "Fisier: $file"
+            lines=$(wc -l < "$file")
+            echo "Linii: $lines"
+
+            # Parcurgem fiecare linie din fisier
+            while IFS= read -r line; do
+                words=$(echo "$line" | wc -w)
+                echo "* linia $((++i)): $words cuvinte"
+
+                # Dacă numărul de cuvinte este par, adăugăm cuvântul înaintea primului cuvânt care începe cu o vocală
+                if [ $((words % 2)) -eq 0 ]; then
+                    first_vowel=$(echo "$line" | grep -oE '\b[aeiouAEIOU][a-zA-Z]*' | head -n 1)
+                    if [ -n "$first_vowel" ]; then
+                        new_line="${line/$first_vowel/$word $first_vowel}"
+                        echo "  - linia modificată: $new_line"
+                    fi
+                fi
+            done < "$file"
+        else
+            echo "Fisier: $file"
+            echo "Fisierul dat nu e de tip text."
+        fi
+    else
+        echo "Fisierul $file nu exista."
+    fi
+done
+
+
+
+
+
+
+
+2.
+
+
+
+#!/bin/bash
+
+# Verificăm dacă există exact un argument
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <argument>" >&2
+    exit 1
+fi
+
+# Salvăm argumentul într-o variabilă
+argument="$1"
+
+# Căutăm fișierele din /usr/include care conțin textul dorit
+files=$(grep -l "#include <$argument>" /usr/include/* 2>/dev/null)
+
+# Verificăm dacă există fișiere care satisfac criteriul
+if [ -z "$files" ]; then
+    echo "Nu am gasit nimic" >&2
+    exit 1
+fi
+
+# Calculăm numărul de #include-uri pentru fiecare fișier și găsim maximul
+max_file=""
+max_count=0
+
+for file in $files; do
+    count=$(grep -c "#include <$argument>" "$file")
+    if [ $count -gt $max_count ]; then
+        max_count=$count
+        max_file="$file"
+    fi
+done
+
+# Afisăm fișierul cu cele mai multe #include-uri
+echo "Maximul este $max_file! Mai jos sunt candidatii in ordine descrescato>grep -c "#include <$argument>" $files | sort -t: -k2nr
+
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+
+
+
+
+#!/bin/bash
+
+# Verifică dacă sunt furnizate argumente
+if [ $# -eq 0 ]; then
+    echo "Numar incorect de argumente."
+    echo "Utilizare: $0 file1 file2 ..."
+    exit 1
+fi
+
+# Funcție pentru a verifica dacă un fișier este de tip text
+is_text_file() {
+    file "$1" | grep -q "text"
+}
+
+# Funcție pentru a număra cuvintele care conțin litera L1 într-o linie
+count_words_with_L1() {
+    local line="$1"
+    local L1="$2"
+    echo "$line" | tr -cs '[:alpha:]' '\n' | grep -c "$L1"
+}
+
+# Funcție pentru a adăuga litera L2 după primul cuvânt care nu conține litera L1
+add_L2_after_first_non_L1_word() {
+    local line="$1"
+    local L1="$2"
+    local L2="$3"
+    local word
+    local found=0
+    while read -r word; do
+        if [[ "$word" != *"$L1"* ]]; then
+            echo -n "$word$L2 "
+            found=1
+        else
+            echo -n "$word "
+        fi
+    done <<< "$line"
+    if [ $found -eq 0 ]; then
+        echo -n "$L2 "
+    fi
+    echo
+}
+
+# Citirea continuă de la tastatură
+while true; do
+    read -p "L1: " L1
+    read -p "L2: " L2
+    if [ "$L1" = "$" ]; then
+        echo "Execuția scriptului s-a încheiat pentru L1='$'."
+        exit 0
+    fi
+
+    # Parcurge fiecare fișier furnizat ca argument
+    for file in "$@"; do
+        if is_text_file "$file"; then
+            echo "Fisier: $file"
+            echo "Linii: $(wc -l < "$file")"
+            while IFS= read -r line; do
+                num_words=$(count_words_with_L1 "$line" "$L1")
+                echo "- linia $((++count)): $num_words cuvinte"
+                if [ $((num_words % 2)) -eq 0 ]; then
+                    echo "$(add_L2_after_first_non_L1_word "$line" "$L1" "$L2")"
+                else
+                    echo "$line"
+                fi
+            done < "$file"
+        else
+            echo "Fisier: $file"
+            echo "Fisierul nu e de tip text."
+        fi
+    done
+done
+

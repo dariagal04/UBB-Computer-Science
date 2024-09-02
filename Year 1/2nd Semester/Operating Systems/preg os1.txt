@@ -1,0 +1,81 @@
+#include<stdlib.h>
+#include<unistd.h>
+#include<stdio.h>
+#include<sys/wait.h>
+#include<string.h>
+#define BUF_SIZE 1024
+int main(int argc, char** argv)
+{
+
+    int pd[2];
+    int res=pipe(pd);
+    if(res==-1){
+        perror("pipe ");
+        exit(EXIT_FAILURE);
+    }
+    int pid=fork();
+    if(pid==-1){
+        perror("fork ");
+        exit(EXIT_FAILURE);
+    }
+    if(pid==0)
+    {
+        close(pd[1]);
+        int nr;
+        char numeFis[20];
+        read(pd[0],&nr,sizeof(int));
+        printf("[CHILD]Am primit numarul:%d\n",nr);
+        sleep(2);
+        read(pd[0],numeFis,sizeof(numeFis));
+        printf("[CHILD]Am primit numele fisierului:%s\n",numeFis);
+        sleep(2);
+        char continut[BUF_SIZE];"
+//      int size=0;
+        read(pd[0],continut,BUF_SIZE);
+        printf("[CHILD] CONTINUTUL:\n%s",continut);
+        char* cuvant=strtok(continut," ");
+        int nrCuv=0;
+        while(cuvant)
+        {
+                if(strlen(cuvant)==nr)
+                        nrCuv++;
+                cuvant=strtok(NULL," ");
+
+        }
+        printf("Nr de cuvinte cu %d litere:%d\n",nr,nrCuv);
+        close(pd[0]);
+        exit(EXIT_SUCCESS);
+
+    }
+    close(pd[0]);
+    int nr;
+    char numeFis[20];
+    printf("[PARENT]Dati un nr:");
+    scanf("%d",&nr);
+    write(pd[1],&nr, sizeof(int));
+    sleep(2);
+    printf("[PARENT]Dati numele unui fisier:");
+    scanf("%s",numeFis);
+    write(pd[1],numeFis,strlen(numeFis));
+    sleep(2);
+    char continut[BUF_SIZE];
+    FILE* fd=fopen(numeFis,"r");
+    int size;
+    if(fd==NULL){
+        perror("fopen");
+        exit(EXIT_FAILURE);
+    }
+    printf("[PARENT]Citesc continutul fisierului..\n");
+    while((size=fread(continut,1,sizeof(continut),fd))>0)
+    {
+        if(write(pd[1],continut,size)==-1)
+        {
+                perror("write");
+                exit(EXIT_FAILURE);
+        }
+    }
+    int status;
+    wait(&status);
+    close(pd[1]);
+    return 0;
+}
