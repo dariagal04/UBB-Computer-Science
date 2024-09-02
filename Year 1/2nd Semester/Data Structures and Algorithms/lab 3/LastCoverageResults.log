@@ -1,0 +1,21 @@
+[2024-05-16 09:21:01] [info] Start Program:
+Path:"D:\dari\an1sem2\SDA\lab3 MDO\x64\Debug\lab3 MDO.exe"
+Arguments:
+Working directory: "D:\dari\an1sem2\SDA\lab3 MDO\lab3 MDO\"
+Modules: Selected: D:\dari\an1sem2\SDA\lab3 MDO\x64\Debug\lab3 MDO.exe Excluded: 
+Sources: Selected: D:\dari\an1sem2\SDA\lab3 MDO\lab3 MDO Excluded: 
+Log Level: Normal
+Cover Children: 0
+Aggregate by file: 1
+Continue after C++ exception: 0
+Optimized build support: 0
+Export: Binary C:\Users\user\AppData\Local\Temp\x5t2ce43.yhv 
+Input coverage: 
+Unified diff: 
+Excluded line regular expressions: 
+Substitute pdb source paths: 
+
+[2024-05-16 09:21:01] [info] Module: D:\dari\an1sem2\SDA\lab3 MDO\x64\Debug\lab3 MDO.exe is selected because it matches selected pattern: D:\dari\an1sem2\SDA\lab3 MDO\x64\Debug\lab3 MDO.exe
+[2024-05-16 09:21:01] [info] ----------------------------------------------------
+[2024-05-16 09:21:01] [info] Coverage binary generated in file: C:\Users\user\AppData\Local\Temp\x5t2ce43.yhv
+[2024-05-16 09:21:01] [info] ----------------------------------------------------
