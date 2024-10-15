@@ -1,0 +1,14 @@
+Derivați clasa SortingTask din Task care sortează un vector de numere întregi si afiseaza vectorul sortat, via metoda execute(). Cerință laborator 2p
+Observatie: Se vor acorda doua puncte doar daca SortingTask permite sortarea unui vector conform unei strategii, altfel se acorda 1p. Se cer doua strategii de sortare – BubbleSort si (QuickSort sau MergeSort). Sugestie: SortingTask incapsuleaza un AbstractSorter ce are metoda sort.
+Consideram că interfata Container specificǎ interfaţa comunǎ pentru colecţii de obiecte Task, în care se pot adǎuga şi din care se pot elimina elemente. public interface Container { Task remove(); void add(Task task); int size(); boolean isEmpty(); } Creaţi douǎ tipuri de containere concrete: 
+1. StackContainer - care implementeazǎ, folosind o reprezentare pe un array, o strategie de tip LIFO; 
+2. QueueContainer - care implementeazǎ, folosind o reprezentare pe un array, o strategie de tip FIFO; Cerință laborator 2p 
+3. Refactorizati clasele StackContainer si QueueContainer astfel incat sa evitati codul duplicat (bad smell). Vezi refactorizarea „Extract
+Superclass” (Solutia: Create an abstract superclass; make the original classes subclasses of this superclass, vezi cartea: Refactoring: Improving the Design of Existing Code by Martin Fowler). Cerință laborator 1p
+Implementati clasa TaskContainerFactory care implementeaza interfata Factory, astfel incat sa nu poata exista decat o singura instanta de acest tip. [Singleton Pattern] (Cerință laborator 1p) + discutie in timpul seminarului.
+Extindeţi clasa AbstractTaskRunner astfel: 
+1. PrinterTaskRunner - care afişeazǎ un mesaj dupǎ execuţia unui task în care se specificǎ ora la care s-a executat task-ul. 
+2. DelayTaskRunner – care execută taskurile cu întârziere; (Cerință laborator 1p) try { Thread.sleep(3000); } catch (InterruptedException e) {
+e.printStackTrace(); }
+Scrieți un program de test care creeaza un vector de task-ri de tipul MessageTask si le executa, initial via un obiect de tipul StrategyTaskRunner apoi via un obiect de tipul DelayTaskRunner (decorator) apoi via un obiect de tipul PrinterTaskRunner (decorator), 
+folosind startegia specificata ca parametru in linia de comanda. 
