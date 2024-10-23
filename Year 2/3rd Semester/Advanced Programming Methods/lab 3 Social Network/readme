@@ -1,34 +1,26 @@
-Reţea de socializare – MAP_ToySocialNetwork
-Implementaţi o reţea de socializare cu un model simplificat, dar din care să poată fi extrase informaţii relevante.
-Funcționalități de bază (cerințe funcționale):
-- Gestiunea utilizatorilor: operații CRUD (pt a avansa mai rapid propun să citim acești utilizatori, inițial dintr-un fisier csv.
-- Gestiunea relațiilor de prietenie între utlizatori: adăgare/ștergere prieten
-- Determnarea comunitații din care face parte un anumit utilizator (componenta conexa a retelei care contine utlizatorul respectiv)
-- Gestiunea mesajelor: trimitere/stergere mesaj
-- Adaugarea unui obiect de tipul Page
-- Gestiunea evenimentelor: se va implementa șablonul Observer pentru notificări, abonare/dezabonare la un eveniment;
-- Autentificare: logare/delogare
-- Vizulare istoric evenimente pe o anumită perioadă calenadaristică
-- Vizualizare istoric utilizaror pe o anumită perioadă calenadaristică
-                                           Modelul Conceptual si Arhitectura aplicației (cerințe nonfuncționale)
-1) Entitățile problemei ar putea fi (puteți să redenumiți îm limba engleză aceste entități și, de asemenea, puteți identifica altele noi sau să le reprezentați altfel pe cele stabilite mai jos):
-1.
-Utilizator:
-2.
-Prietenie
-3.
-Retea
-4.
-Mesaj
-5.
-Eveniment
-6.
-...
-2)
-Relații între entități:
+A.
+Cerințe funționale (– vezi fișierul Enunt Proiect Lab - Retea de socializare.pdf):
 -
-Un utilizator al rețelei are o lista de prieteni
+Add/Remove Utilizator (2p)
 -
-O prietenie se stabilește între doi utilizatori ai rețelei
+Add/Remove Prieten (2p)
 -
-Rețeau este definită de mulțimea utilizatorilor și a relațiilor de prietenie dintre aceștia
+Afisare numar de comunitati (numarul de componente conexe din graful retelei) (0.5p)
+-
+Afisare cea mai sociabila comunitate (componenta conexa din retea cu cel mai lung drum) (0.5p)
+B.
+Cerințe non-funționale (vezi seminarul 4): 4p
+-
+Arhitectură Stratificată 0.5
+-
+DDD (Domain Driven Design) 0.25
+-
+Documentația - Java doc (Tools->Generate Java Doc in InteliJ Idea) 0.5
+-
+Persistența datelor: în memorie sau in file 1p
+-
+Validarea datelor - (Strategy Pattern) 0.5
+-
+Definiți propriile clase de excepții pentru tratarea situațiilor speciale; 0.25
+-
+Interfața cu utilizatorul, de tip consolă, poate sa fie minimalista, nu este deocamdata necesar un meniu
