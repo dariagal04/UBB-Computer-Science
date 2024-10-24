@@ -1,4 +1,3 @@
 Imaginaţi o aplicaţie simplă ce necesită o bază de date.
 Reprezentaţi datele aplicaţiei într-o structură relaţională şi implementaţi structura într-o bază de date Microsoft SQL Server.
 Baza de date trebuie să conţină cel puţin 10 tabele şi trebuie să împlementeze cel puţin o relaţie 1-m şi cel puţin o relaţie m-n.
-Înainte de a începe proiectarea trimiteţi un e-mail cu tema aleasă asistentului de laborator cu subiectul pentru care doriţi să creaţi baza de date (alături de o scurtă descriere).
