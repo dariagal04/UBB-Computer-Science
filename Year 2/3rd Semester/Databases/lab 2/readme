@@ -6,3 +6,12 @@ Creaţi 10 interogări pe baza de date creată pentru primul laborator. Este nec
 - 7 interogări ce extrag informaţii din mai mult de 2 tabele
 - 2 interogări pe tabele alfate în relaţie m-n.
 Interogările trebuie să fie relevante pentru tema bazei de date şi vor returna informaţii utile unui potenţial utilizator.
+
+
+Facute de mine:
+- 5 interogări ce folosesc where :  1,2,3,4,7 +
+- 3 interogări ce folosesc group by : 2,5,6 10 +
+- 2 interogări ce folosesc distinct : 3,4 +
+- 2 interogări cu having : 5,6 +
+- 7 interogări ce extrag informaţii din mai mult de 2 tabele :  4,5,6,7,8,9,10 +
+- 2 interogări pe tabele alfate în relaţie m-n. : 4,7 +
