@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Formular Validare</title>
+    <style>
+        body {
+            background-color: rgb(170, 0, 255);
+            font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+        .invalid {
+            border: 10px solid red;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        input {
+            width: 800px;
+            height: 50px;
+            background-color: #6f82ff;
+            border-radius: 20px;
+            color: white;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        label, p {
+            color: black;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<form id="myForm">
+    <div class="container">
+        <label for="nume">Nume:</label><br>
+        <input type="text" id="nume"><br>
+        <label for="dataNasterii">Data nașterii:</label><br>
+        <input type="date" id="dataNasterii"><br>
+        <label for="varsta">Vârstă:</label><br>
+        <input type="number" id="varsta"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email"><br>
+        <br>
+        <input type="button" value="Trimite" onclick="validare()">
+        <p id="mesaj"></p>
+    </div>
+</form>
+
+<script>
+    function isEmailValid(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function calculeazaVarsta(dataNasterii) {
+        const azi = new Date();
+        const nastere = new Date(dataNasterii);
+        let varsta = azi.getFullYear() - nastere.getFullYear();
+        const luna = azi.getMonth() - nastere.getMonth();
+        if (luna < 0 || (luna === 0 && azi.getDate() < nastere.getDate())) {
+            varsta--;
+        }
+        return varsta;
+    }
+
+    function validare() {
+        var nume = document.getElementById('nume');
+        var dataNasterii = document.getElementById('dataNasterii');
+        var varsta = document.getElementById('varsta');
+        var email = document.getElementById('email');
+        var mesaj = document.getElementById('mesaj');
+
+        // Resetare clase și mesaj
+        [nume, dataNasterii, varsta, email].forEach(el => el.classList.remove('invalid'));
+        mesaj.textContent = '';
+
+        let campuriInvalide = [];
+
+        if (!nume.value.trim()) {
+            nume.classList.add('invalid');
+            campuriInvalide.push('nume');
+        }
+
+        if (!dataNasterii.value) {
+            dataNasterii.classList.add('invalid');
+            campuriInvalide.push('data nașterii');
+        }
+
+        const varstaCalculata = dataNasterii.value ? calculeazaVarsta(dataNasterii.value) : null;
+        if (!varsta.value || varsta.value <= 0 || 
+            (varstaCalculata !== null && parseInt(varsta.value) !== varstaCalculata)) {
+            varsta.classList.add('invalid');
+            campuriInvalide.push('vârstă');
+        }
+
+        if (!email.value || !isEmailValid(email.value)) {
+            email.classList.add('invalid');
+            campuriInvalide.push('email');
+        }
+
+        if (campuriInvalide.length > 0) {
+            mesaj.textContent = `Câmpurile ${campuriInvalide.join(', ')} nu sunt completate corect!`;
+        } else {
+            mesaj.textContent = 'Datele sunt completate corect';
+        }
+    }
+</script>
+
+
+</body>
+</html>

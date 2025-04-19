@@ -1,0 +1,106 @@
+<!--Sa se implementeze folosind JavaScript urmatoarea problema. O matrice cu numar par de elemente,
+    reprezentata vizual sub forma unui tabel, contine perechi de numere initial ascunse. Daca utilizatorul
+    da click pe doua celule ale tabelului ce contin numere egale acestea vor fi afisate si vor ramane afisate.
+    Daca numerele continute in cele doua celule nu sunt egale, vor fi ascunse din nou dupa un numar de 2, 3 secunde.
+    Jocul se termina cand toate perechile de numere au fost ghicite. Dupa prima implementare a jocului, se va crea
+    o noua versiune in care numerele vor fi inlocuite cu imagini (ce contin fructe spre exemplu, sau “profi” de
+    pe pagina facultatii). Problema mai este recunoscuta si sub numele de Memory Game. Nu se vor folosi biblioteci
+    de functii, jQuery, pluginuri, etc.-->
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: rgb(106, 0, 255);
+                font-family: "Comic Sans MS", cursive, sans-serif;
+                height: 100vh;
+            }
+            .cell {
+                width: 200px;
+                height: 200px;
+                border: 1px solid black;
+                text-align: center;
+                background-color: white;
+                vertical-align: middle;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <table id="game-board"></table>
+    
+        <script>
+            var board = [
+                ['https://cdn.aarp.net/content/dam/aarp/health/healthy-living/2023/02/1140-heart-rate-yarn-yellow-background.jpg', 'https://i.natgeofe.com/k/7bfcf2d2-542e-44f0-962a-c36f2efa98a5/heart_4x3.jpg', 'https://images.twinkl.co.uk/tw1n/image/private/t_630/u/ux/heart-wiki_ver_1.png','https://easydrawingguides.com/wp-content/uploads/2018/09/Human-Heart-10.png'],
+                ['https://cdn.aarp.net/content/dam/aarp/health/healthy-living/2023/02/1140-heart-rate-yarn-yellow-background.jpg', 'https://i.natgeofe.com/k/7bfcf2d2-542e-44f0-962a-c36f2efa98a5/heart_4x3.jpg', 'https://images.twinkl.co.uk/tw1n/image/private/t_630/u/ux/heart-wiki_ver_1.png','https://easydrawingguides.com/wp-content/uploads/2018/09/Human-Heart-10.png'],
+                ['https://easydrawingguides.com/wp-content/uploads/2023/03/how-to-draw-a-cartoon-heart-featured-image-1200.png', 'https://centralgaheart.com/wp-content/uploads/2017/03/Draw-a-Human-Heart-Step-5-Version-2.jpg', 'https://cdn.pixabay.com/photo/2017/02/11/16/57/heart-2058044_640.png','https://images.contentstack.io/v3/assets/blt8a393bb3b76c0ede/blt8fd74c80d8340674/6788462c19a7e326940b3ce4/catalyst-partnership-grants.jpg?format=pjpg&auto=webp'],
+                ['https://easydrawingguides.com/wp-content/uploads/2023/03/how-to-draw-a-cartoon-heart-featured-image-1200.png', 'https://centralgaheart.com/wp-content/uploads/2017/03/Draw-a-Human-Heart-Step-5-Version-2.jpg', 'https://cdn.pixabay.com/photo/2017/02/11/16/57/heart-2058044_640.png','https://images.contentstack.io/v3/assets/blt8a393bb3b76c0ede/blt8fd74c80d8340674/6788462c19a7e326940b3ce4/catalyst-partnership-grants.jpg?format=pjpg&auto=webp']
+            ];
+            board = board.flat().sort(() => Math.random() - 0.5);
+            var selectedCells = [];
+            var foundPairs = 0;
+    
+            function createBoard() {
+                var table = document.getElementById('game-board');
+                for (var i = 0; i < 4; i++) {
+                    var row = document.createElement('tr');
+                    for (var j = 0; j < 4; j++) {
+                        var cell = document.createElement('td');
+                        cell.textContent = '';
+                        cell.classList.add('cell');
+                        cell.addEventListener('click', handleClick(i, j));
+                        row.appendChild(cell);
+                    }
+                    table.appendChild(row);
+                }
+            }
+    
+            function handleClick(i, j) {
+                return function() {
+                    var cell = this;
+                    if (cell.hasChildNodes() || selectedCells.length === 2) return;
+                    var img = document.createElement('img');
+                    img.src = board[i * 4 + j];
+                    img.style.width = '200px';
+                    img.style.height = '200px';
+                    cell.appendChild(img);
+                    selectedCells.push(cell);
+                    if (selectedCells.length === 2) {
+                        var cells = document.querySelectorAll('.cell');
+                        cells.forEach(function(cell) {
+                            cell.removeEventListener('click', handleClick(i, j));
+                        });
+                        if (selectedCells[0].firstChild.src === selectedCells[1].firstChild.src) {
+                            foundPairs++;
+                            selectedCells = [];
+                            if (foundPairs === 8) {
+                                setTimeout(function() {
+                                    alert('You won!');
+                                }, 1);
+                            }
+                            cells.forEach(function(cell) {
+                                cell.addEventListener('click', handleClick(i, j));
+                            });
+                        } else {
+                            setTimeout(function() {
+                                selectedCells[0].removeChild(selectedCells[0].firstChild);
+                                selectedCells[1].removeChild(selectedCells[1].firstChild);
+                                selectedCells = [];
+                                cells.forEach(function(cell) {
+                                    cell.addEventListener('click', handleClick(i, j));
+                                });
+                            }, 500);
+                        }
+                    }
+                };
+            }
+    
+            createBoard();
+        </script>
+    </body>
+    </html>
