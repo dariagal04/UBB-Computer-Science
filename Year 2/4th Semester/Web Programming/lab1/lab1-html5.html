@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formular Aplicare Internship - HTML5</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Formular aplicare Internship</h1>
+    <p style="text-align: center;"><a href="https://www.w3schools.com/html/" target="_blank">Viziteaz&#259; pagina oficial&#259;</a></p>
+    
+    <form action="submit.php" method="post">
+        <fieldset>
+            <legend><b>Date Personale</b></legend>
+            <label for="nume">Nume:</label>
+            <input type="text" id="nume" name="nume" maxlength="50" readonly><br>
+            
+            <label for="prenume">Prenume:</label>
+            <input type="text" id="prenume" name="prenume" maxlength="50" required><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" maxlength="100" required><br>
+            
+            <label for="parola">Parol&#259;:</label>
+            <input type="password" id="parola" name="parola" maxlength="20" required><br>
+            
+            <label for="telefon">Telefon:</label>
+            <input type="tel" id="telefon" name="telefon" maxlength="15" disabled><br>
+            
+            <label>Gen:</label>
+    <table>
+        <tr>
+            <td><input type="radio" name="gen" value="masculin">Masculin</td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="gen" value="feminin">Feminin</td>
+        </tr>
+    </table><br>
+            
+            <label for="data_nasterii">Data na&#537;terii:</label>
+            <input type="date" id="data_nasterii" name="data_nasterii"><br>
+        </fieldset>
+        
+        <fieldset>
+            <legend><b>Adres&#259;</b></legend>
+            <label for="tara">&#354;ara:</label>
+            <select id="tara" name="tara">
+                <option value="ro" selected>Rom&acirc;nia</option>
+                <option value="us">Statele Unite</option>
+                <option value="uk">Marea Britanie</option>
+            </select><br>
+            
+            <label for="oras">Ora&#537;:</label>
+            <input type="text" id="oras" name="oras" maxlength="50"><br>
+            
+            <label for="cod_postal">Cod Po&#537;tal:</label>
+            <input type="text" id="cod_postal" name="cod_postal" maxlength="10"><br>
+            
+            <label for="adresa">Adres&#259;:</label>
+            <textarea id="adresa" name="adresa" cols="40" rows="3"></textarea>
+        </fieldset>
+        
+        <fieldset>
+            <legend><b>Cerin&#539;e</b></legend>
+            <p>Abilit&#259;&#539;i:</p>
+            <ul>
+                <li>OOP
+                    <ol type="A" start="2">
+                        <li>Java</li>
+                        <li>C++</li>
+                    </ol>
+                </li>
+                <li>Englez&#259;</li>
+                <li>HTML
+                    <ol type="I">
+                        <li>HTML 4.01</li>
+                        <li>HTML5</li>
+                    </ol>
+                </li>
+                <li>SQL</li>
+            </ul>
+            <label>
+                <input type="checkbox" name="update_email" checked>
+                Doresc update-uri pe email
+            </label><br>
+            
+            <label for="experienta">Experien&#539;&#259; relevant&#259;:</label>
+            <textarea id="experienta" name="experienta" cols="40" rows="3"></textarea>
+        </fieldset>
+        
+        <fieldset>
+            <legend><b>Alte informa&#539;ii</b></legend>
+            <label>Tip internship:</label>
+            <input type="radio" name="tip_internship" value="full_time"> Full-time
+            <input type="radio" name="tip_internship" value="part_time"> Part-time<br>
+            
+            <label for="cv">Fi&#537;ier CV:</label>
+            <input type="file" id="cv" name="cv" multiple><br>
+            
+            <label for="ore_saptamana">Disponibilitate ore/s&#259;pt&#259;m&acirc;n&#259;:</label>
+            <input type="number" id="ore_saptamana" name="ore_saptamana" min="1" max="40" step="1">
+        </fieldset>
+        
+        <fieldset>
+            <legend><b>Imagine</b></legend>
+            <img src="cv.png" alt="Exemplu CV" title="Exemplu de CV" width="200" height="150">
+        </fieldset>
+        
+        <input type="submit" value="Trimite">
+        <input type="reset" value="Reseteaz&#259;">
+    </form>
+</body>
+</html>

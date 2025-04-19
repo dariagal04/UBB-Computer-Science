@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Formular Aplicare Internship - HTML 4.01</title>
+</head>
+
+<body>
+    <center>
+        <h1>Formular aplicare Internship</h1>
+        <p><a href="http://www.w3schools.com/html/default.asp" target="_blank">Viziteaz&#259; pagina oficial&#259;</a></p>
+    </center>
+    <form action="submit.php" method="post">
+        <fieldset>
+            <legend><b>Date Personale</b></legend>
+            <table border="1" width="100%" bgcolor="#f0f0f0">
+                <tr>
+                    <th align="left" valign="top">Nume:</th>
+                    <td><input type="text" name="nume" maxlength="50" readonly></td>
+                </tr>
+                <tr>
+                    <th align="left" valign="top">Prenume:</th>
+                    <td><input type="text" name="prenume" maxlength="50"></td>
+                </tr>
+                <tr>
+                    <th align="left" valign="top">Email:</th>
+                    <td><input type="text" name="email" maxlength="100"></td>
+                </tr>
+                <tr>
+                    <th align="left" valign="top">Parol&#259;:</th>
+                    <td><input type="password" name="parola" maxlength="20"></td>
+                </tr>
+                <tr>
+                    <th align="left" valign="top">Telefon:</th>
+                    <td><input type="text" name="telefon" maxlength="15" disabled></td>
+                </tr>
+                <tr>
+                    <th align="left" valign="top">Gen:</th>
+                    <td>
+                        <table border="1">
+                            <tr>
+                                <td><input type="radio" name="gen" value="masculin">Masculin</td>
+                            </tr>
+                            <tr>
+                                <td><input type="radio" name="gen" value="feminin">Feminin</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <th align="left" valign="top">Data na&#537;terii:</th>
+                    <td><input type="text" name="data_nasterii" maxlength="10"></td>
+                </tr>
+            </table>
+        </fieldset>
+        
+        <fieldset>
+            <legend><b>Adres&#259;</b></legend>
+            <p>&#354;ara: 
+                <select name="tara" multiple>
+                    <option value="ro" selected>Rom&acirc;nia</option>
+                    <option value="us">Statele Unite</option>
+                    <option value="uk">Marea Britanie</option>
+                </select>
+            </p>
+            <p>Ora&#537;: <input type="text" name="oras" maxlength="50"></p>
+            <p>Cod Po&#537;tal: <input type="text" name="cod_postal" maxlength="10"></p>
+            <p>Adres&#259;: <textarea name="adresa" cols="40" rows="3"></textarea></p>
+        </fieldset>
+        
+        <fieldset>
+            <legend><b>Cerin&#539;e</b></legend>
+            <p>Abilit&#259;&#539;i:</p>
+            <ul>
+                <li>OOP
+                    <ol type="A" start="2">
+                        <li>Java</li>
+                        <li>C++</li>
+                    </ol>
+                </li>
+                <li>Englez&#259;</li>
+                <li>HTML
+                    <ol type="I">
+                        <li>HTML 4.01</li>
+                        <li>HTML5</li>
+                    </ol>
+                </li>
+                <li>SQL</li>
+            </ul>
+            <p>Doresc update-uri pe email <input type="checkbox" name="update_email" checked></p>
+            <p>Experien&#539;&#259; relevant&#259;:
+                <textarea name="experienta" cols="40" rows="3"></textarea>
+            </p>
+        </fieldset>
+        
+        <fieldset>
+            <legend><b>Alte informa&#539;ii</b></legend>
+            <table border="1" width="100%">
+                <tr>
+                    <th align="left" colspan="2">Tip internship:</th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="tip_internship" value="full_time"> Full-time
+                        <input type="radio" name="tip_internship" value="part_time"> Part-time
+                    </td>
+                </tr>
+                <tr>
+                    <th align="left">Fi&#537;ier CV:</th>
+                    <td><input type="file" name="cv"></td>
+                </tr>
+                <tr>
+                    <th align="left">Disponibilitate ore/s&#259;pt&#259;m&acirc;n&#259;:</th>
+                    <td><input type="text" name="ore_saptamana"></td>
+                </tr>
+            </table>
+        </fieldset>
+        
+        <fieldset>
+            <legend><b>Imagine</b></legend>
+            <p>
+                <img src="cv.png" alt="Exemplu CV" title="Exemplu de CV" width="200" height="150">
+            </p>
+        </fieldset>
+
+        <p>
+            <input type="submit" value="Trimite">
+            <input type="reset" value="Reseteaz&#259;">
+        </p>
+    </form>
+</body>
+</html>
