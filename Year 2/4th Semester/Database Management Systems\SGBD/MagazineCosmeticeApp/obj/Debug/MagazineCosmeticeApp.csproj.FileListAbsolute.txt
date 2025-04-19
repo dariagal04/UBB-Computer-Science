@@ -1,0 +1,10 @@
+D:\dari\an2sem2\SGBD\MagazineCosmeticeApp\obj\Debug\MagazineCosmeticeApp.csproj.AssemblyReference.cache
+D:\dari\an2sem2\SGBD\MagazineCosmeticeApp\obj\Debug\MagazineCosmeticeApp.Form1.resources
+D:\dari\an2sem2\SGBD\MagazineCosmeticeApp\obj\Debug\MagazineCosmeticeApp.Properties.Resources.resources
+D:\dari\an2sem2\SGBD\MagazineCosmeticeApp\obj\Debug\MagazineCosmeticeApp.csproj.GenerateResource.cache
+D:\dari\an2sem2\SGBD\MagazineCosmeticeApp\obj\Debug\MagazineCosmeticeApp.csproj.CoreCompileInputs.cache
+D:\dari\an2sem2\SGBD\MagazineCosmeticeApp\bin\Debug\MagazineCosmeticeApp.exe.config
+D:\dari\an2sem2\SGBD\MagazineCosmeticeApp\bin\Debug\MagazineCosmeticeApp.exe
+D:\dari\an2sem2\SGBD\MagazineCosmeticeApp\bin\Debug\MagazineCosmeticeApp.pdb
+D:\dari\an2sem2\SGBD\MagazineCosmeticeApp\obj\Debug\MagazineCosmeticeApp.exe
+D:\dari\an2sem2\SGBD\MagazineCosmeticeApp\obj\Debug\MagazineCosmeticeApp.pdb
